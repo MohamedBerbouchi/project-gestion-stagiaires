@@ -14,8 +14,8 @@
 <!-- imprimir   enregistre -->
 <link rel="stylesheet" href="{{ asset('assets/plugins/icons/feather/feather.css')}}"> 
 
-<!-- alert message -->
-<link rel="stylesheet" href="assets/plugins/toastr/toatr.css">
+<!-- alert message -->$
+ <link rel="stylesheet" href="assets/plugins/toastr/toatr.css">
 
 
 

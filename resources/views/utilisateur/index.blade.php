@@ -3,7 +3,17 @@
 
 @section('content')
 <div class="content container-fluid">
-
+    @if (session('success') )
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>
+            <strong>
+            
+                <i class="fe fe-thumbs-up" style="font-size: 2em" data-bs-toggle="tooltip" title="" data-bs-original-title="fe fe-thumbs-up" aria-label="fe fe-thumbs-up"></i>
+            </strong>    
+        </strong> {{session('success')}}.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+   @endif
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
@@ -68,37 +78,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                    <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                            data-cfemail="60021209010e0a0f080e130f0e200518010d100c054e030f0d">1</a>
-                                    </td>
-                                    <td>$295</td>
-                                    <td>16 Nov 2020</td>
-                                    <td>16 Nov 2020</td>
- 
-                                     <td >
+                          
+                                     
+                                @foreach ($users as $item)
+                                <tr>
+                                <td>{{$item->id}}</td>
+                                <td>{{$item->login}}</td>
+                                <td>{{$item->role}}</td>
+                                <td>{{$item->email}}</td>
+                                <td >
                                         
 
-                                        <abbr title="Modifier">
-                                            <a href="{{ route('utilisateurs.edit', 1)}}"
-                                                class="btn btn-sm btn-white text-success me-2">
-                                                <i class="far fa-edit me-1"></i>
-                                                <!-- <i class="far fa-edit me-1"></i> Modifier -->
-                                            </a>
-                                        </abbr>
-                                        <!-- {{ route('matieres.delete', 1)}} -->
+                                    <abbr title="Modifier">
+                                        <a href="{{ route('utilisateurs.edit', $item->id)}}"
+                                            class="btn btn-sm btn-white text-success me-2">
+                                            <i class="far fa-edit me-1"></i>
+                                            <!-- <i class="far fa-edit me-1"></i> Modifier -->
+                                        </a>
+                                    </abbr>
+                                    <!-- {{ route('utilisateurs.delete', $item->id)}} -->
 
-                                        <abbr title="Supprimer">
-                                            <a href="#" 
-                                                class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
-                                                <i class="far fa-trash-alt me-1" ></i>
-                                                <!-- <i class="far fa-trash-alt me-1" ></i>Supprimer -->
-                                            </a>
-                                        </abbr>
-                                                <!-- <button type="button"  class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
-                                                Delete</button> -->
-                                    </td>
-                                </tr>
+                                    <abbr title="Supprimer">
+                                        <a href=" {{ route('utilisateurs.delete', $item->id)}}"  onclick="return confirm('etes vous sur voulez vous supprimer cet utilisateur ?')"
+                                            class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
+                                            <i class="far fa-trash-alt me-1" ></i>
+                                            <!-- <i class="far fa-trash-alt me-1" ></i>Supprimer -->
+                                        </a>
+                                    </abbr>
+                                            <!-- <button type="button"  class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
+                                            Delete</button> -->
+                                </td>
+                            </tr>
+                                @endforeach
+                                  
+ 
+                                     
+                                
                             </tbody>
                         </table>
                     </div>

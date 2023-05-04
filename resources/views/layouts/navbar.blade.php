@@ -94,7 +94,7 @@
                     Profile</a>
                 <a class="dropdown-item" href="settings"><i data-feather="settings" class="me-1"></i>
                     Settings</a>
-                <a class="dropdown-item" href="login"><i data-feather="log-out" class="me-1"></i>
+                <a class="dropdown-item" href="{{ route('logout') }}"><i data-feather="log-out" class="me-1"></i>
                     Logout</a>
             </div>
         </li>

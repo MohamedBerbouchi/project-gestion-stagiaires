@@ -20,7 +20,9 @@ src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
  <!-- {{-- script for add stagiaires --}} -->
 <script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
  
+   
   
+
   <!-- {{-- script for index stagiaires --}} -->
 <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
@@ -33,7 +35,7 @@ src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
 <script src="assets/plugins/sweetalert/sweetalerts.min.js"></script>
 
 
- 
+
 
 
 
