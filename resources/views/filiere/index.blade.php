@@ -3,7 +3,15 @@
 
 @section('content')
 <div class="content container-fluid">
-
+    @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size: 1.5em" >
+        <strong>
+            
+            <i class="fe fe-thumbs-up" data-bs-toggle="tooltip" title="" data-bs-original-title="fe fe-thumbs-up" aria-label="fe fe-thumbs-up"></i>
+        </strong> {{session('success')}}.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+   @endif
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
@@ -27,29 +35,44 @@
     </div>
 
 
-    <div id="filter_inputs" class="card filter-card">
+    <div class="card ">
         <div class="card-body pb-0">
+            <form action="{{ route('filieres.search') }}" method="post">
+            @csrf
             <div class="row">
+               
+                
                 <div class="col-sm-6 col-md-3">
                     <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control">
+                        <label>Niveau </label>
+                        <select name="niveau_diplome" class="select">
+                            <option value="tous">Tous les niveaux</option>
+                            <option value="Q">Qualification</option>
+                            <option value="T">Technicien</option>
+                            <option value="TS">Technicien Spécialisé</option>
+                            <option value="FC">Attestation de FC</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class="form-control">
+                        <label>Recherche par nom </label>
+                        <input type="text" name="nom_diplome" class="form-control"  placeholder="Recherche par nom ...">
+                         
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="form-group">
-                        <label>Phone</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
+                 <div class="col-sm-6 col-md-3" style="display: flex; align-items: center;">
+                  <button  class="btn btn-primary me-1">
+                        <i class='fa fa-search'></i>
+                     </button>
+                  {{-- <button type="button" onclick="redirectToRoute()"  class="btn btn-primary me-1">
+                        <i class='fa fa-search'></i>
+                     </button> --}}
+                      </div>
+                    
             </div>
         </div>
+    </form>
     </div>
 
     <div class="row shadow-lg  mb-5 bg-body rounded">
@@ -71,36 +94,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                    <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                            data-cfemail="60021209010e0a0f080e130f0e200518010d100c054e030f0d">ayoub moustakim</a>
-                                    </td>
-                                    <td>$295</td>
-                                    <td>16 Nov 2020</td>
-                                    <td>16 Nov 2020</td>
-                                    <td>16 Nov 2020</td>
-                                    <td>16 Nov 2020</td>
-
-                                    <td><span class="badge badge-pill bg-success-light">Active</span></td>
-                                    <td >
-                                        <abbr title="Modifier">
-                                            <a href="{{ route('filieres.edit', 1)}}"
-                                                class="btn btn-sm btn-white text-success me-2">
-                                                <i class="far fa-edit me-1"></i>
-                                                <!-- <i class="far fa-edit me-1"></i> Modifier -->
-                                            </a>
-                                        </abbr>
-                                        <abbr title="Supprimer">
-                                            <a href="#" 
-                                                class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
-                                                <i class="far fa-trash-alt me-1" ></i>
-                                                <!-- <i class="far fa-trash-alt me-1" ></i>Supprimer -->
-                                            </a>
-                                        </abbr>
-                                                <!-- <button type="button"  class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
-                                                Delete</button> -->
-                                    </td>
-                                </tr>
+                    @foreach ($filieres as $item) 
+                                <tr>
+                                         
+                                        <td>{{$item->id}}</td>
+                                        <td>{{$item->nom}}</td>
+                                        <td>{{$item->niveau_diplome}}</td>
+                                        <td>{{$item->frais_inscription}}</td>
+                                        <td>{{$item->frais_mansuel}}</td>
+                                        <td>{{$item->frais_examen}}</td>
+    
+                                        <td>{{$item->frais_diplome}}</td>
+                                        <td >
+                                            <abbr title="Modifier">
+                                                <a href="{{ route('filieres.edit',$item->id )}}"
+                                                    class="btn btn-sm btn-white text-success me-2">
+                                                    <i class="far fa-edit me-1"></i>
+                                                    <!-- <i class="far fa-edit me-1"></i> Modifier -->
+                                                </a>
+                                            </abbr>
+                                            <abbr title="Supprimer">
+                                                <a href="{{ route('filieres.delete',$item->id )}}"  onclick="return confirm('Etes vous sur ?')"
+                                                    class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
+                                                    <i class="far fa-trash-alt me-1" ></i>
+                                                    <!-- <i class="far fa-trash-alt me-1" ></i>Supprimer -->
+                                                </a>
+                                            </abbr>
+                                                    <!-- <button type="button"  class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
+                                                    Delete</button> -->
+                                        </td>
+                                    </tr>
+                    @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -109,4 +133,23 @@
         </div>
     </div>
 </div>
+
+   
+<script>
+                                   
+  
+//     function redirectToRoute() {
+        
+//         let niveau_diplome = document.getElementById("niveau_diplome").value;
+//         let nom_diplome = document.getElementById("annee_scolaire").value;
+
+        
+//             var url = "{{route('programmes.search', [':value1', ':value2', ':value3']) }}";
+//             url = url.replace(':value1', id_filiere);
+//             url = url.replace(':value2', annee_scolaire);
+//             url = url.replace(':value3', classe);
+//             window.location.href = url;
+       
+//     }
+// </script>
 @endsection

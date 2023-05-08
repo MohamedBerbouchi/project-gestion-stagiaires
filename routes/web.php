@@ -77,10 +77,11 @@ Route::middleware(['IsLoggedIn'])->group(function () {
     // Route::get('/filieres/show/{id}',[FiliereController::class, "show"])->name('filieres.show');
     Route::get('/filieres/create',[FiliereController::class, "create"])->name('filieres.create');
     Route::post('/filieres/store', [FiliereController::class, 'store'])->name('filieres.store');
+    Route::post('/filieres/search', [FiliereController::class, 'search'])->name('filieres.search');
 
     Route::get('/filieres/edit/{id}',[FiliereController::class, "edit"])->name('filieres.edit');
     Route::put('/filieres/update/{id}',[FiliereController::class, "update"])->name('filieres.update');
-    Route::post('/filieres/delete/{id}',[FiliereController::class, "delete"])->name('filieres.delete');
+    Route::get('/filieres/delete/{id}',[FiliereController::class, "delete"])->name('filieres.delete');
 
 
 

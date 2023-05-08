@@ -14,7 +14,32 @@ class FiliereController extends Controller
      */
     public function index()
     {
-        return view('filiere.index');
+
+        $filieres = Filiere::all();
+
+        return view('filiere.index', compact("filieres"));
+    }
+    public function search(Request $request)
+    {
+
+        if ( $request->niveau_diplome == "tous"){
+            
+            if(trim($request->nom_diplome) != ""){
+                 $filieres = Filiere::all()->where("nom",  strtolower($request->nom_diplome));
+            }else{
+                $filieres = Filiere::all();
+            }
+        }else{
+            if(trim($request->nom_diplome) != ""){
+
+                $filieres = Filiere::all()->where("niveau_diplome", strtolower($request->niveau_diplome))->where("nom",strtolower( $request->nom_diplome));
+            }else{
+                $filieres = Filiere::all()->where("niveau_diplome",  strtolower($request->niveau_diplome));
+
+            }
+        }
+
+        return view('filiere.index', compact("filieres"));
     }
 
     /**
@@ -24,66 +49,86 @@ class FiliereController extends Controller
      */
     public function create()
     {
+
         return view('filiere.create');
         
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(Request $request)
     {
-        dd($request);
+        $request->validate([
+            "nom" => "required",
+            "niveau_diplome" => "required",
+            "duree_formation"=> "required",
+            "stage1"=> "required",
+            "stage2"=> "required",
+            "niveau_admission"=> "required",
+            "frais_inscription"=> "required",
+            "frais_mansuel"=> "required",
+            "frais_examen"=> "required",
+            "frais_diplome"=> "required",
+            "date_creation"=> "required",
+            "num_autorisation"=> "required",
+            "date_qualification"=> "required",
+            "num_qualification"=> "required",
+            "date_accreditation"=> "required",
+            "num_accreditation"=> "required",
+        ]);
+
+        Filiere::create($request->all());
+
+        return redirect()->route('filieres.index')->with("success", " la filiere  est ajouter avec success");
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Filiere  $filiere
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Filiere $filiere)
+ 
+    public function edit($id)
     {
-        // return view('filiere.show');
+        $filiere =  Filiere::find($id);
+
+        return view('filiere.edit', compact("filiere"));
+
+    }
+ 
+    public function update(Request $request,  $id)
+    {
+        // dd($request);
+        $request->validate([
+            "nom" => "required",
+            "niveau_diplome" => "required",
+            "duree_formation"=> "required",
+            "stage1"=> "required",
+            "stage2"=> "required",
+            "niveau_admission"=> "required",
+            "frais_inscription"=> "required",
+            "frais_mansuel"=> "required",
+            "frais_examen"=> "required",
+            "frais_diplome"=> "required",
+            "date_creation"=> "required",
+            "num_autorisation"=> "required",
+            "date_qualification"=> "required",
+            "num_qualification"=> "required",
+            "date_accreditation"=> "required",
+            "num_accreditation"=> "required",
+        ]);
+        $filiere =  Filiere::find($id);
+
+        $filiere->update($request->all());
+
+        return redirect()->route('filieres.index')->with("success", " la filiere  est modifier avec success");
+
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Filiere  $filiere
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Filiere $filiere)
+   
+    public function delete( $id)
     {
-        return view('filiere.edit');
+        $filiere =  Filiere::find($id);
 
-    }
+        $filiere->delete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Filiere  $filiere
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Filiere $filiere)
-    {
-        dd($request);
+        return redirect()->route('filieres.index')->with("success", " la filiere  est supprimer avec success");
+
         
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Filiere  $filiere
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Filiere $filiere)
-    {
-        //
     }
 }

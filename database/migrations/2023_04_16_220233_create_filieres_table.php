@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('niveau_diplome');
-            $table->integer('duree_formation');
+            $table->string('duree_formation');
             $table->string('stage1');
             $table->string('stage2');
             $table->string('niveau_admission');
