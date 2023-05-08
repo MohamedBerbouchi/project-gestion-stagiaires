@@ -91,8 +91,8 @@ Route::middleware(['IsLoggedIn'])->group(function () {
     Route::post('/matieres/store', [MatieresController::class, 'store'])->name('matieres.store');
 
     Route::get('/matieres/edit/{id}',[MatieresController::class, "edit"])->name('matieres.edit');
-    Route::put('/matieres/update/{id}',[MatieresController::class, "update"])->name('matieres.update');
-    Route::post('/matieres/delete/{id}',[MatieresController::class, "delete"])->name('matieres.delete');
+    Route::post('/matieres/update/{id}',[MatieresController::class, "update"])->name('matieres.update');
+    Route::get('/matieres/delete/{id}',[MatieresController::class, "destroy"])->name('matieres.delete');
 
 
 
@@ -101,10 +101,12 @@ Route::middleware(['IsLoggedIn'])->group(function () {
     // Routes for Programme  
     Route::get('/programmes',[ProgrammeController::class, "index"])->name('programmes.index');
     Route::get('/programmes/create',[ProgrammeController::class, "create"])->name('programmes.create');
+    Route::post('/programmes/store',[ProgrammeController::class, "store"])->name('programmes.store');
     Route::get('/programmes/edit/{id}',[ProgrammeController::class, "edit"])->name('programmes.edit');
     Route::get('/programmes/show/{id}',[ProgrammeController::class, "show"])->name('programmes.show');
     Route::post('/programmes/update/{id}',[ProgrammeController::class, "update"])->name('programmes.update');
-    Route::post('/programmes/delete/{id}',[ProgrammeController::class, "delete"])->name('programmes.delete');
+    Route::get('/programmes/delete/{id}',[ProgrammeController::class, "destroy"])->name('programmes.delete');
+    Route::get('/programmes/search/{id_filiere}/{annee_scolaire}/{classe}',[ProgrammeController::class, "search"])->name('programmes.search');
 
     // Routes for utilisateurs  
     Route::get('/utilisateurs',[UtilisateurController::class, "index"])->name('utilisateurs.index');

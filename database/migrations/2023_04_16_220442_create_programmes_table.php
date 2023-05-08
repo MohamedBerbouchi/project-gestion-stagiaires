@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('classe');
             $table->unsignedBigInteger('id_filiere');
             $table->unsignedBigInteger('id_matiere');
-    
+            
+            
 
             $table->foreign('id_filiere')->references('id')->on('filieres'); 
             $table->foreign('id_matiere')->references('id')->on('matieres'); 

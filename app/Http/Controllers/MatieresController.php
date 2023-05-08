@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Matieres;
 use Illuminate\Http\Request;
 
+ use App\Models\Filiere;
+
 class MatieresController extends Controller
 {
     /**
@@ -14,76 +16,67 @@ class MatieresController extends Controller
      */
     public function index()
     {
-            return view('matiere.index');
+            $matieres = Matieres::all();
+            return view('matiere.index', compact("matieres"));
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function create()
     {
         return view('matiere.create');
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        dd($request);
-    }
+        $request->validate([
+            "nom" => "required|alpha",
+            "nombre_heure_total" => "required|numeric",
+            "nombre_heure_tp" => "required|numeric",
+            "nombre_heure_th" => "required|numeric",
+            "coef" => "required|numeric",
+        ]);
+        Matieres::create($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Matieres  $matieres
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Matieres $matieres)
-    {
-        // return view('matiere.show');
+       return redirect()->back()->with("success", "matiere est cree");
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Matieres  $matieres
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Matieres $matieres)
-    {
-        return view('matiere.edit');
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Matieres  $matieres
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Matieres $matieres)
+   
+    public function edit( $id)
     {
-        dd($request);
+        $matiere = Matieres::find($id);
+
+        return view('matiere.edit', compact('matiere'));
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Matieres  $matieres
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Matieres $matieres)
+
+    public function update(Request $request, $id)
     {
-        //
+         
+        $request->validate([
+            "nom" => "required|alpha",
+            "nombre_heure_total" => "required|numeric",
+            "nombre_heure_tp" => "required|numeric",
+            "nombre_heure_th" => "required|numeric",
+            "coef" => "required|numeric",
+        ]);
+        $matiere = Matieres::find($id);
+        $matiere->update($request->all());
+          return redirect()->back()->with("success", "matiere est modifier");
+
+    }
+
+    
+    public function destroy( $id)
+    {
+        $matiere = Matieres::find($id);
+
+        $matiere->delete();
+        return redirect()->back()->with("success", "matiere est supprimer");
+
     }
 }

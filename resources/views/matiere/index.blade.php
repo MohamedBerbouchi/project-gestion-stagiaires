@@ -3,7 +3,17 @@
 
 @section('content')
 <div class="content container-fluid">
-
+ @if (session('success') )
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 1.5em" > 
+        <strong>
+            <strong>
+            
+                <i class="fe fe-thumbs-up"  data-bs-toggle="tooltip" title="" data-bs-original-title="fe fe-thumbs-up" aria-label="fe fe-thumbs-up"></i>
+            </strong>    
+        </strong> {{session('success')}}.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+   @endif
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
@@ -58,6 +68,7 @@
                     <div class="table-responsive">
                         <table class="table table-center table-hover datatable text-center">
                             <thead class="thead-light">
+
                                 <tr>
                                     <th>ID Matiere</th>
                                     <th>Nom</th>
@@ -70,33 +81,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                    <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                            data-cfemail="60021209010e0a0f080e130f0e200518010d100c054e030f0d">ayoub moustakim</a>
-                                    </td>
-                                    <td>$295</td>
-                                    <td>16 Nov 2020</td>
-                                    <td>16 Nov 2020</td>
-                                    <td>16 Nov 2020</td>
+                                
+                                @foreach ($matieres as $item)
+                                <tr>
+                                    
+                                  
+                                    <td>{{ $item->id}}</td>
+                                    <td>{{ $item->nom}}</td>
+                                    <td>{{ $item->nombre_heure_total}}</td>
+                                    <td>{{ $item->nombre_heure_tp}}</td>
+                                    <td>{{ $item->nombre_heure_th}}</td>
 
-                                    <td><span class="badge badge-pill bg-success-light">Active</span></td>
+                                    <td>{{ $item->coef}}</td>
                                     <td >
                                         
 
                                         <abbr title="Modifier">
-                                            <a href="{{ route('matieres.edit', 1)}}"
+                                            <a href="{{ route('matieres.edit',  $item->id)}}"
                                                 class="btn btn-sm btn-white text-success me-2">
                                                 <i class="far fa-edit me-1"></i>
                                             </a>
                                         </abbr>
 
                                         <abbr title="Supprimer">
-                                            <a href="#" class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
+                                            <a href="{{ route('matieres.delete',  $item->id)}}" class="btn btn-sm btn-white text-danger me-2" id="confirm-text" onclick="return confirm('are you sure ?')">
                                                 <i class="far fa-trash-alt me-1" ></i>
                                             </a>
                                         </abbr>
                                     </td>
                                 </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

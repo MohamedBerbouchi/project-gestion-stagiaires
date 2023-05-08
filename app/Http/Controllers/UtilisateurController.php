@@ -43,6 +43,12 @@ class UtilisateurController extends Controller
  
     public function update(Request $request,  $id)
     {
+        $request->validate([
+            "login" => "required",
+            "pwd" => "required",
+            "role" => "required",
+            "email" => "required|unique:utilisateurs,email",
+        ]);
          $utilisateur = Utilisateur::find($id);
         $utilisateur->update($request->all());
  

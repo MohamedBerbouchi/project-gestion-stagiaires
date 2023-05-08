@@ -4,6 +4,8 @@
 <head>
     
     @include('layouts.head')
+     @yield('title')
+
 </head>
 
 <body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">

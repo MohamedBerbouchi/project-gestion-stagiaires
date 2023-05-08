@@ -1,5 +1,10 @@
 @extends('layouts.index')
 
+
+@section('title')
+<title>Statistiqus</title>
+@endsection
+
 @section('content')
 <div class="content container-fluid">
     <h1>Statistiqus de l'année scolaire 2022/2023</h1>

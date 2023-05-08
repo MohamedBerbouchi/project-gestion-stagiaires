@@ -4,11 +4,11 @@
 @section('content')
 <div class="content container-fluid">
     @if (session('success') )
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 1.5em" >
         <strong>
             <strong>
             
-                <i class="fe fe-thumbs-up" style="font-size: 2em" data-bs-toggle="tooltip" title="" data-bs-original-title="fe fe-thumbs-up" aria-label="fe fe-thumbs-up"></i>
+                <i class="fe fe-thumbs-up" data-bs-toggle="tooltip" title="" data-bs-original-title="fe fe-thumbs-up" aria-label="fe fe-thumbs-up"></i>
             </strong>    
         </strong> {{session('success')}}.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

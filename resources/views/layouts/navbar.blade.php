@@ -1,13 +1,13 @@
 <div class="header header-one">
     <div class="header-left header-left-one">
         <a href="/home" class="logo">
-            <img src="assets/img/Logo_ofppt.png" alt="Logo">
+            <img src="{{asset('assets/img/Logo_ofppt.png')}}" alt="Logo">
         </a>
         <!-- <a href="index.html" class="white-logo" style="border:2px solid yellow">>
             <img src="assets\img\logo-white.png" alt="Logo">
         </a> -->
         <a href="\home" class="logo logo-small" >
-            <img src="assets/img/Logo_ofpptx.png" alt="Logo" width="30" height="30">
+            <img src="{{asset('assets/img/Logo_ofppt.png')}}" alt="Logo" width="30" height="30">
         </a>
     </div>
     <a href="javascript:void(0);" id="toggle_btn">
