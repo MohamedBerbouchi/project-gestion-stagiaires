@@ -39,7 +39,7 @@ class MatieresController extends Controller
         ]);
         Matieres::create($request->all());
 
-       return redirect()->back()->with("success", "matiere est cree");
+       return redirect()->route("matieres.index")->with("success", "matiere est cree");
 
 
     }

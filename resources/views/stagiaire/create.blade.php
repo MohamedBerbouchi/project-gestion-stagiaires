@@ -29,7 +29,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>PRENOM</label>
-                                    <input type="text" name="prenom" class="form-control">
+                                    <input type="text" name="prenom" class="form-control" value="{{old('prenom')}}">
                                     <p class="text-danger">
                                     @if($errors->has('prenom'))
                                             {{$errors->first('prenom')}}
@@ -39,7 +39,7 @@
 
                                 <div class="form-group">
                                     <label>Nom</label>
-                                    <input type="text" name="nom" class="form-control">
+                                    <input type="text" name="nom" class="form-control" value="{{old('nom')}}">
                                     <p class="text-danger">
                                     @if($errors->has('nom'))
                                             {{$errors->first('nom')}}
@@ -47,8 +47,8 @@
                                     </p>
                                 </div>
                                 <div class="form-group">
-                                    <label>DATE_NAISSANCE</label>
-                                    <input type="date" name="date_naissance" class="form-control">
+                                    <label>Date Naissance</label>
+                                    <input type="date" name="date_naissance" class="form-control" value="{{old('date_naissance')}}">
                                     <p class="text-danger">
                                     @if($errors->has('date_naissance'))
                                             {{$errors->first('date_naissance')}}
@@ -56,8 +56,8 @@
                                     </p>
                                 </div>
                                 <div class="form-group">
-                                    <label>LIEU_NAISSANCE</label>
-                                    <input type="text" name="lieu_naissance" class="form-control">
+                                    <label>Lieu Naissance</label>
+                                    <input type="text" name="lieu_naissance" class="form-control" value="{{old('lieu_naissance')}}">
                                     <p class="text-danger">
                                     @if($errors->has('lieu_naissance'))
                                             {{$errors->first('lieu_naissance')}}
@@ -65,8 +65,8 @@
                                     </p>
                                 </div>
                                 <div class="form-group">
-                                    <label>ADRESSE</label>
-                                    <input type="text" name="adresse" class="form-control">
+                                    <label>Adresse</label>
+                                    <input type="text" name="adresse" class="form-control" value="{{old('adresse')}}">
                                     <p class="text-danger">
                                     @if($errors->has('adresse'))
                                             {{$errors->first('adresse')}}
@@ -74,8 +74,8 @@
                                     </p>
                                 </div>
                                 <div class="form-group">
-                                    <label>VILLE</label>
-                                    <input type="text" name="ville" class="form-control">
+                                    <label>Ville</label>
+                                    <input type="text" name="ville" class="form-control" value="{{old('ville')}}">
                                     <p class="text-danger">
                                     @if($errors->has('ville'))
                                             {{$errors->first('ville')}}
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>CIN</label>
-                                    <input type="text" name="cin" class="form-control">
+                                    <input type="text" name="cin" class="form-control" value="{{old('cin')}}">
                                     <p class="text-danger">
                                     @if($errors->has('cin'))
                                             {{$errors->first('cin')}}
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>TEL</label>
-                                    <input type="text" name="tel" class="form-control">
+                                    <input type="text" name="tel" class="form-control" value="{{old('tel')}}">
                                     <p class="text-danger">
                                     @if($errors->has('tel'))
                                             {{$errors->first('tel')}}
@@ -103,16 +103,9 @@
                                 <div class="form-group">
                                     <label>NIVEAU SCOLAIRE</label>
                                     <select class="select" name="niveau_scolaire">
-                                        <option>Select Country</option>
-                                        <option selected>Afghanistan</option>
-                                        <option>Afghanistan</option>
-                                        <option>Albania</option>
-                                        <option>Algeria</option>
-                                        <option>American Samoa</option>
-                                        <option>Andorra</option>
-                                        <option>Angola</option>
-                                        <option>Anguilla</option>
-                                        <option >United States</option>
+                                          <option value="1">9 Af ou diplome spécialisation</option>
+                                         <option value="2">Niveau Bac ou diplome Qualification</option>
+                                          <option value="3">Bachelier ou diplome Technecien</option>
                                     </select>
                                     <p class="text-danger">
                                     @if($errors->has('niveau_scolaire'))
@@ -127,7 +120,7 @@
 
                                 <div class="form-group">
                                     <label>DERNIER DIPLOME:</label>
-                                    <input type="text" name="dernier_diplome" class="form-control">
+                                    <input type="text" name="dernier_diplome" class="form-control" value="{{old('dernier_diplome')}}">
                                     <p class="text-danger">
                                     @if($errors->has('dernier_diplome'))
                                             {{$errors->first('dernier_diplome')}}
@@ -137,7 +130,7 @@
 
                                 <div class="form-group">
                                     <label>DERNIER ETABLISSMENT:</label>
-                                    <input type="text" name="dernier_etablissement" class="form-control">
+                                    <input type="text" name="dernier_etablissement" class="form-control" value="{{old('dernier_etablissement')}}">
                                     <p class="text-danger">
                                     @if($errors->has('dernier_etablissement'))
                                             {{$errors->first('dernier_etablissement')}}
@@ -146,7 +139,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>NUM D'INSCRIPTION</label>
-                                    <input type="text" name="num_inscription" class="form-control">
+                                    <input type="text" name="num_inscription" class="form-control" value="{{old('num_inscription')}}">
                                     <p class="text-danger">
                                     @if($errors->has('num_inscription'))
                                             {{$errors->first('num_inscription')}}
@@ -156,7 +149,7 @@
                 
                                 <div class="form-group">
                                     <label>DATE D'INSCRIPTION :</label>
-                                    <input type="date" name="date_inscription" class="form-control">
+                                    <input type="date" name="date_inscription" class="form-control" value="{{old('date_inscription')}}">
                                     <p class="text-danger">
                                     @if($errors->has('date_inscription'))
                                             {{$errors->first('date_inscription')}}
@@ -165,7 +158,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>CODE NATIONAL:</label>
-                                    <input type="text" name="code_national" class="form-control">
+                                    <input type="text" name="code_national" class="form-control" value="{{old('code_national')}}">
                                     <p class="text-danger">
                                     @if($errors->has('code_national'))
                                             {{$errors->first('code_national')}}
@@ -185,8 +178,12 @@
                                 <div class="form-group">
                                     <label>Filière:</label>
                                     <select class="select" name="id_filiere">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
+
+                                    @foreach ($filieres as $filiere)
+                                        
+                                        <option value="{{$filiere->id}}">{{$filiere->nom}}</option>
+                                    @endforeach
+                                      
                                     
                                     </select>
                                     <p class="text-danger">
@@ -196,12 +193,19 @@
                                     </p>
                                 </div>
                                 <div class="form-group">
+                                  @php
+                                    $currentYear = date('Y');
+                                    $startYear = $currentYear - 10;
+                                    $years = range($currentYear,$startYear);
+                                     
+                                @endphp
+
                                     <label>Année scolaie:</label>
                                     <select class="select" name="annee_scolaire">
-                                        <option value="2000">2000</option>
-                                        <option value="2001">2001</option>
-                                        <option value="2002">2002</option>
                                         
+                                        @foreach ($years as $year)
+                                    <option value="{{$year}}-{{$year+1}}">{{ $year }}/{{ $year + 1 }}</option>
+                                         @endforeach
                                     </select>
                                     <p class="text-danger">
                                     @if($errors->has('annee_scolaire'))
@@ -218,6 +222,18 @@
                                     <p class="text-danger">
                                     @if($errors->has('classe'))
                                             {{$errors->first('classe')}}
+                                    @endif
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <label>civilite:</label>
+                                    <select class="select" name="civilite">
+                                    <option value="H"> Homme</option>
+                                    <option value="F"> Femme</option>
+                                    </select>
+                                    <p class="text-danger">
+                                    @if($errors->has('civilite'))
+                                            {{$errors->first('civilite')}}
                                     @endif
                                     </p>
                                 </div>

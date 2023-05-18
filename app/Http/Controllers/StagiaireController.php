@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stagiaire;
+use App\Models\Utilisateur;
+use App\Models\Scolarite;
+use App\Models\Filiere;
 use Illuminate\Http\Request;
 use DB;
-
+use Illuminate\Support\Facades\Session;
 
 class StagiaireController extends Controller
 {
@@ -14,10 +17,19 @@ class StagiaireController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct() {
+    
+        
+      }
     public function index()
     {
         $stagiaire = Stagiaire::all();
-// 
+        // $s = Scolarite::all();
+//
+    //    return $s[0]->stagiaire;
+        // return  $stagiaire[0]->scolarite;
+        // return  $stagiaire[0];
+
         // $stagiaire = DB::table('stagiaires')->orderBy('id', 'asc');
         // $stagiaire = DB::table('stagiaires');
         // dd($candidat);
@@ -34,7 +46,9 @@ class StagiaireController extends Controller
      */
     public function create()
     {
-        return view('stagiaire.create');
+        $filieres = Filiere::all();
+
+        return view('stagiaire.create', compact('filieres'));
     }
 
     /**
@@ -46,8 +60,13 @@ class StagiaireController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        
-        // Valider les données du formulaire et créer un nouvel étudiant
+        $userId = Session::get('userId');
+        $userRole = Utilisateur::select("role")->where("id", $userId)->first();
+     
+        // $this->userRole =  $userRole;
+
+         // Valider les données du formulaire et créer un nouvel étudiant
+        if(  $userRole->role == 'Directeur'){
         $request->validate([
             'prenom' => 'required|string|max:255',
             'nom' => 'required|string|max:255',
@@ -63,26 +82,25 @@ class StagiaireController extends Controller
             'num_inscription' => 'required|string|max:255',
             'date_inscription' => 'required|string|max:255',
             'code_national' => 'required|string|max:255',
-            'photo' => 'required',
-            'id_filiere' => 'required|integer',
-            'annee_scolaire' => 'required|integer',
+             'id_filiere' => 'required|integer',
+            'annee_scolaire' => 'required',
             'classe' => 'required|string|max:255',
+            'civilite' => 'required',
         ]);
 
-        // $nom_photo= $_FILES['photo']['name'];
-		// // Récuperer le nom de la photo "image1.jpg" ou "image2.png"
-
-        // $image_tmp=$_FILES['photo']['tmp_name'];
-        //     // Recupérer le nom du fichier image temporaire dans serveru
+           if($request->has('photo')){
+            $photo = time() . "-". $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs(
+                'stagiaires', $photo
+            );  
+        }else{
+            $path = "stagiaires/default.jpg";
+        }
+ 
         
-        // move_uploaded_file($image_tmp,'../images/'.$nom_photo);
-            //Déplacer le fichier image temporaire vers le dossier 
-            //images du serveur avec le nom réel
-        $jj="kkkk";
-        $civilite='f';
 
         $stagiaire  = new Stagiaire();
-        $stagiaire->civilite = $civilite;
+        $stagiaire->civilite = $request->civilite;
         $stagiaire->prenom = $request->prenom;
         $stagiaire->nom = $request->nom;
         $stagiaire->date_naissance = $request->date_naissance;
@@ -97,15 +115,41 @@ class StagiaireController extends Controller
         $stagiaire->num_inscription = $request->num_inscription;
         $stagiaire->date_inscription = $request->date_inscription;
         $stagiaire->code_national = $request->code_national;
-        $stagiaire->photo = $jj;
+        $stagiaire->photo =  $path ;
         // $stagiaire->id_filiere = $request->id_filiere;
         // $stagiaire->annee_scolaire = $request->annee_scolaire;
         // $stagiaire->classe = $request->classe;
         $stagiaire->save();
 
+        // $x = "select max(id) as idMaxInTableSta from stagiaires";
+        // $tous_les_stagiaires = DB::select($x);
+        // $id_max_stg = $tous_les_stagiaires[0]->idMaxInTableSta;
+
+        $annee_scolaire = $request->input('annee_scolaire');
+        $id_filiere = $request->input('id_filiere');
+        $classe = $request->input('classe');
+        $resultat_stag = "inscrit";
+        $date_resultat = $request->input('date_inscription');
+        
+        $scolarite = new Scolarite();
+        $scolarite->annee_scolaire = $annee_scolaire;
+        $scolarite->id_stagiaire =$stagiaire->id;
+        $scolarite->id_filiere = $id_filiere;
+        $scolarite->classe = $classe;
+        $scolarite->resultat = $resultat_stag;
+        $scolarite->date_resultat = $date_resultat;
+        $scolarite->save();
+
         // Stagiaire::create($request->all());
 
         return redirect()->route('stagiaires.index')->with('success', 'stagiaire a été créé avec succès.');
+    
+    }elseif (Auth::user()->role == 'Secretaire'){
+        return redirect()->route('statistique');
+    }else{
+        return redirect()->route('/login');
+    }
+    
     }
 
     /**

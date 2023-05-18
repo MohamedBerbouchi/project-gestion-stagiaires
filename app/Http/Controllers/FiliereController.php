@@ -25,14 +25,14 @@ class FiliereController extends Controller
         if ( $request->niveau_diplome == "tous"){
             
             if(trim($request->nom_diplome) != ""){
-                 $filieres = Filiere::all()->where("nom",  strtolower($request->nom_diplome));
+                 $filieres = Filiere::all()->where("nom", "like", "%".strtolower($request->nom_diplome) . "%");
             }else{
                 $filieres = Filiere::all();
             }
         }else{
             if(trim($request->nom_diplome) != ""){
 
-                $filieres = Filiere::all()->where("niveau_diplome", strtolower($request->niveau_diplome))->where("nom",strtolower( $request->nom_diplome));
+                $filieres = Filiere::all()->where("niveau_diplome", strtolower($request->niveau_diplome))->where("nom","like", "%".strtolower( $request->nom_diplome). "%");
             }else{
                 $filieres = Filiere::all()->where("niveau_diplome",  strtolower($request->niveau_diplome));
 

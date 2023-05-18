@@ -22,6 +22,9 @@ class ProgrammeController extends Controller
     public function create(Request $request)
     {
 
+
+        // there are a probel in filire
+
         // return $request->annee_scolaire;
         $annee_scolaire = $request->annee_scolaire;
         $filiere =["id" => $request->id_filiere, "nom"=> Filiere::find($request->id_filiere)->nom];

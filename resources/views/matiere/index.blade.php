@@ -36,15 +36,20 @@
     </div>
 
 
+
+
+
     <div id="filter_inputs" class="card filter-card">
         <div class="card-body pb-0">
             <div class="row">
                 <div class="col-sm-6 col-md-3">
                     <div class="form-group">
                         <label>Name</label>
+
                         <input type="text" class="form-control">
                     </div>
                 </div>
+                
                 <div class="col-sm-6 col-md-3">
                     <div class="form-group">
                         <label>Email</label>
@@ -62,6 +67,7 @@
     </div>
 
     <div class="row">
+    
         <div class="col-sm-12">
             <div class="card card-table">
                 <div class="card-body">
@@ -120,6 +126,19 @@
         </div>
     </div>
 </div>
+@if (session('success') )
+                <button type="button" class="btn btn-outline-info mr-1 mb-1 d-none" id="fast-duration">Show .5s</button>
+@endif
+ 
+ <script>
+    window.onload = function() {
+        @if (session('success') )
+        document.getElementById("fast-duration").click();
+        @endif
+    };
+</script>
+
+ 
 @endsection
 
 

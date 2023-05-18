@@ -37,6 +37,8 @@
 
     <div class="card ">
         <div class="card-body pb-0">
+         <button type="button" class="btn btn-outline-primary mr-1 mb-1 d-none"  id="position-bottom-left">Bottom
+Left</button>
             <form action="{{ route('filieres.search') }}" method="post">
             @csrf
             <div class="row">
@@ -136,8 +138,7 @@
 
    
 <script>
-                                   
-  
+   
 //     function redirectToRoute() {
         
 //         let niveau_diplome = document.getElementById("niveau_diplome").value;

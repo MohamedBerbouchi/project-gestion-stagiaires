@@ -77,12 +77,14 @@
                             <tr>
                                     <td>{{$item->id}}</td>
                                     <td>{{$item->nom}}</td>
-                                    <td>6666666</td>
-                                    <td>dev</td>
-                                    <td>dev209</td>
-                                    <td>scoler</td>
+                                    <td>{{$item->scolarite->annee_scolaire}}</td>
+                                    <td>{{$item->scolarite->filiere->nom}}</td>
+                                    <td>{{$item->scolarite->classe}}</td>
+                                    <td>{{$item->scolarite->resultat}}</td>
+                                    
+                             
 
-                                    <td>{{$item->photo}}</td>
+                                    <td> <img width="50" src="images/{{$item->photo}}"></td>
 
                                     <td >
                                         <abbr title="Modifier">
@@ -127,4 +129,15 @@
         </div>
     </div>
 </div>
+@if (session('success') )
+                <button type="button" class="btn btn-outline-info mr-1 mb-1 d-none" id="fast-duration">Show .5s</button>
+@endif
+ 
+ <script>
+    window.onload = function() {
+        @if (session('success') )
+        document.getElementById("fast-duration").click();
+        @endif
+    };
+</script>
 @endsection
