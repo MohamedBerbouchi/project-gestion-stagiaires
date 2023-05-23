@@ -3,17 +3,7 @@
 
 @section('content')
 <div class="content container-fluid">
-    @if (session('success') )
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 1.5em" >
-        <strong>
-            <strong>
-            
-                <i class="fe fe-thumbs-up" data-bs-toggle="tooltip" title="" data-bs-original-title="fe fe-thumbs-up" aria-label="fe fe-thumbs-up"></i>
-            </strong>    
-        </strong> {{session('success')}}.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-   @endif
+   
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
@@ -122,4 +112,29 @@
         </div>
     </div>
 </div>
+@if (session('success') )
+
+        @if (session('success') == "add")
+             <button type="button" data-content="utilisateur" class="btn btn-outline-info mr-1 mb-1 d-none" id="fast-duration">Stagiaire ajouter</button>
+                {{session('success')}}
+        @elseif (session('success')== "del")
+                <button type="button"  data-content="utilisateur" class="btn btn-outline-info mr-1 mb-1 d-none" id="timeout">Timeout 5s</button>
+        @elseif (session('success') == "edit")
+            <button type="button"   data-content="utilisateur"  class="btn btn-outline-info mr-1 mb-1 d-none" id="sticky">Sticky Toast</button>
+
+        @endif
+               
+@endif
+ 
+ <script>
+    window.onload = function() {
+        @if (session('success') && session('success') == "add")
+            document.getElementById("fast-duration").click();
+        @elseif (session('success') && session('success') == "del")
+             document.getElementById("timeout").click();
+        @elseif (session('success') && session('success')== "edit" )
+             document.getElementById("sticky").click();
+        @endif
+    };
+</script>
 @endsection

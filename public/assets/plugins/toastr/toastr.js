@@ -158,7 +158,8 @@ $(function () {
             toastr.remove();
         }),
         b.on("click", function () {
-            toastr.info("Have fun storming the castle!", "Miracle Max Says", {
+            const content = $(this).data("content");
+            toastr.info(`${content} est   ajouté`, "Success", {
                 rtl: o,
             });
         }),
@@ -166,7 +167,8 @@ $(function () {
             toastr.clear();
         }),
         B.on("click", function () {
-            toastr.success("Have fun storming the castle!", "Fast Duration", {
+            const content = $(this).data("content");
+            toastr.success(`${content} est   ajouté`, "Success", {
                 showDuration: 500,
                 rtl: o,
             });
@@ -178,23 +180,25 @@ $(function () {
             });
         }),
         M.on("click", function () {
+            const content = $(this).data("content");
             toastr.error(
-                "I do not think that word means what you think it means.",
-                "Timeout!",
+                `${content} est   supprimer`, "Success",
+                
                 { timeOut: 5e3, rtl: o }
             );
         }),
         T.on("click", function () {
+            const content = $(this).data("content");
             toastr.info(
-                "I do not think that word means what you think it means.",
-                "Sticky!",
+                `${content} est   modifier`, "Success",
                 { timeOut: 0, rtl: o }
             );
         }),
         C.on("click", function () {
+            const content = $(this).data("content");
+
             toastr.success(
-                "I do not think that word means what you think it means.",
-                "Slide Down / Slide Up!",
+                `${content} est   modifier`, "Success",
                 {
                     showMethod: "slideDown",
                     hideMethod: "slideUp",

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Filiere;
 use Illuminate\Http\Request;
+use App\Models\Utilisateur;
+use Illuminate\Support\Facades\Session;
+
 
 class FiliereController extends Controller
 {
@@ -12,12 +15,18 @@ class FiliereController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public  function getRole() {
+        $userId = Session::get('userId');
+        $userRole = Utilisateur::select("role")->where("id",   $userId)->first();
+        return $userRole->role;
+        
+    }
     public function index()
     {
 
         $filieres = Filiere::all();
 
-        return view('filiere.index', compact("filieres"));
+        return view('filiere.index', compact("filieres"))->with("userRole",   $this->getRole());
     }
     public function search(Request $request)
     {
@@ -38,8 +47,9 @@ class FiliereController extends Controller
 
             }
         }
+        
 
-        return view('filiere.index', compact("filieres"));
+        return view('filiere.index', compact("filieres"))->with("userRole",   $this->getRole());
     }
 
     /**
@@ -77,7 +87,7 @@ class FiliereController extends Controller
 
         Filiere::create($request->all());
 
-        return redirect()->route('filieres.index')->with("success", " la filiere  est ajouter avec success");
+        return redirect()->route('filieres.index')->with("success", "add");
 
     }
 
@@ -115,7 +125,7 @@ class FiliereController extends Controller
 
         $filiere->update($request->all());
 
-        return redirect()->route('filieres.index')->with("success", " la filiere  est modifier avec success");
+        return redirect()->route('filieres.index')->with("success", "edit");
 
         
     }
@@ -127,7 +137,7 @@ class FiliereController extends Controller
 
         $filiere->delete();
 
-        return redirect()->route('filieres.index')->with("success", " la filiere  est supprimer avec success");
+        return redirect()->route('filieres.index')->with("success", "del");
 
         
     }

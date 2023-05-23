@@ -22,9 +22,6 @@ use App\Models\Programme;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.index');
-});
 
 
 
@@ -46,7 +43,10 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::middleware(['IsLoggedIn'])->group(function () {
-
+    Route::get('/', function () {
+        return view('layouts.index');
+    });
+    
     Route::get('/home', function () {
         return view('layouts.statistique');
     })->name('home');
@@ -57,7 +57,7 @@ Route::middleware(['IsLoggedIn'])->group(function () {
     Route::post('/stagiaires/store', [StagiaireController::class, 'store'])->name('stagiaires.store');
     Route::get('/stagiaires/edit/{id}',[StagiaireController::class, "edit"])->name('stagiaires.edit');
     Route::post('/stagiaires/update/{id}',[StagiaireController::class, "update"])->name('stagiaires.update');
-    Route::delete('/stagiaires/delete/{id}',[StagiaireController::class, "delete"])->name('stagiaires.delete');
+    Route::get('/stagiaires/delete/{id}',[StagiaireController::class, "destroy"])->name('stagiaires.delete');
 
 
 

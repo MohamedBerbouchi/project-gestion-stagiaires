@@ -3,17 +3,7 @@
 
 @section('content')
 <div class="content container-fluid">
- @if (session('success') )
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 1.5em" > 
-        <strong>
-            <strong>
-            
-                <i class="fe fe-thumbs-up"  data-bs-toggle="tooltip" title="" data-bs-original-title="fe fe-thumbs-up" aria-label="fe fe-thumbs-up"></i>
-            </strong>    
-        </strong> {{session('success')}}.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-   @endif
+
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
@@ -28,43 +18,16 @@
                 <a href="{{ route('matieres.create') }}" class="btn btn-primary me-1">
                     <i class="fas fa-plus"></i>
                 </a>
-                <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
-                    <i class="fas fa-filter"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-    <div id="filter_inputs" class="card filter-card">
-        <div class="card-body pb-0">
-            <div class="row">
-                <div class="col-sm-6 col-md-3">
-                    <div class="form-group">
-                        <label>Name</label>
-
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
                 
-                <div class="col-sm-6 col-md-3">
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="text"  class="form-control">
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="form-group">
-                        <label>Phone</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+
+
+
+
+
+    
 
     <div class="row">
     
@@ -82,7 +45,9 @@
                                     <th>TP</th>
                                     <th>TH</th>
                                     <th class="text-end">Coeff</th>
+                                    @if ($userRole == "Directeur")
                                     <th class="text-end">Action</th>
+                                    @endif
 
                                 </tr>
                             </thead>
@@ -99,6 +64,7 @@
                                     <td>{{ $item->nombre_heure_th}}</td>
 
                                     <td>{{ $item->coef}}</td>
+                                    @if ($userRole == "Directeur")
                                     <td >
                                         
 
@@ -115,6 +81,7 @@
                                             </a>
                                         </abbr>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
 
@@ -127,18 +94,30 @@
     </div>
 </div>
 @if (session('success') )
-                <button type="button" class="btn btn-outline-info mr-1 mb-1 d-none" id="fast-duration">Show .5s</button>
+
+        @if (session('success') == "add")
+             <button type="button" data-content="matiere" class="btn btn-outline-info mr-1 mb-1 d-none" id="fast-duration">Stagiaire ajouter</button>
+                {{session('success')}}
+        @elseif (session('success')== "del")
+                <button type="button"  data-content="matiere" class="btn btn-outline-info mr-1 mb-1 d-none" id="timeout">Timeout 5s</button>
+        @elseif (session('success') == "edit")
+            <button type="button"   data-content="matiere"  class="btn btn-outline-info mr-1 mb-1 d-none" id="sticky">Sticky Toast</button>
+
+        @endif
+               
 @endif
  
  <script>
     window.onload = function() {
-        @if (session('success') )
-        document.getElementById("fast-duration").click();
+        @if (session('success') && session('success') == "add")
+            document.getElementById("fast-duration").click();
+        @elseif (session('success') && session('success') == "del")
+             document.getElementById("timeout").click();
+        @elseif (session('success') && session('success')== "edit" )
+             document.getElementById("sticky").click();
         @endif
     };
 </script>
-
- 
 @endsection
 
 

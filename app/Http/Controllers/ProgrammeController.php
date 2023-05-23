@@ -6,16 +6,23 @@ use App\Models\Programme;
 use App\Models\Filiere;
 use App\Models\Matieres;
 use Illuminate\Http\Request;
-
+use App\Models\Utilisateur;
+use Illuminate\Support\Facades\Session;
 class ProgrammeController extends Controller
 {
     
+    public  function getRole() {
+        $userId = Session::get('userId');
+        $userRole = Utilisateur::select("role")->where("id",   $userId)->first();
+        return $userRole->role;
+        
+    }
     public function index()
     {
 
         $programmes = Programme::all();
         $filieres = Filiere::all();
-        return view('programme.index', compact('programmes', "filieres"));
+        return view('programme.index', compact('programmes', "filieres"))->with("userRole",   $this->getRole());
     }
 
   
@@ -64,7 +71,7 @@ class ProgrammeController extends Controller
          
         }
 
-       return redirect()->route('programmes.index')->with("success", "le programmes de la filiere  est cree avec success");
+       return redirect()->route('programmes.index')->with("success", "add");
         
 
 
@@ -101,7 +108,7 @@ class ProgrammeController extends Controller
        
         $filieres = Filiere::all();
   
-        return view('programme.index', compact('programmes', "filieres"));
+        return view('programme.index', compact('programmes', "filieres"))->with("userRole",   $this->getRole());
 
         
     }
@@ -117,7 +124,7 @@ class ProgrammeController extends Controller
     {
         $programme = Programme::find($id);
         $programme->delete();
-        return redirect()->back()->with("success", "le programmes de la filiere  est supprimer avec success");
+        return redirect()->back()->with("success", "del");
        
     }
 }

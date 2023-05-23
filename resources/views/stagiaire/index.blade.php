@@ -87,13 +87,7 @@
                                     <td> <img width="50" src="images/{{$item->photo}}"></td>
 
                                     <td >
-                                        <abbr title="Modifier">
-                                            <a href="{{ route('stagiaires.edit', $item->id)}}"
-                                                class="btn btn-sm btn-white text-success me-2">
-                                                <i class="far fa-edit me-1"></i>
-                                                <!-- <i class="far fa-edit me-1"></i> Modifier -->
-                                            </a>
-                                        </abbr>
+                                      
                                         <abbr title="Afficher">
                                             <a href="{{ route('stagiaires.show',$item->id)}}"
                                                 class="btn btn-sm btn-white text-primary  me-2">
@@ -101,6 +95,7 @@
                                                 <!-- <i class="far fa-eye me-1"></i> Afficher -->
                                             </a>
                                         </abbr>
+
                                         <abbr title="Imprimer">
                                             <a href="{{ route('stagiaires.impression',$item->id)}}"
                                                 class="btn btn-sm btn-white text-primary  me-2">
@@ -108,14 +103,23 @@
                                                 <!-- <i class="fe fe-printer "></i> Imprimer -->
                                             </a>
                                         </abbr>
+                              @if ($userRole == "Directeur")
+                                <abbr title="Modifier">
+                                            <a href="{{ route('stagiaires.edit', $item->id)}}"
+                                                class="btn btn-sm btn-white text-success me-2">
+                                                <i class="far fa-edit me-1"></i>
+                                                <!-- <i class="far fa-edit me-1"></i> Modifier -->
+                                            </a>
+                                        </abbr>
                                         <!-- {{ route('stagiaires.delete', 1)}} -->
                                         <abbr title="Supprimer">
-                                            <a href="#" 
-                                                class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
+                                            <a href="{{route('stagiaires.delete',  $item->id)}}" 
+                                                class="btn btn-sm btn-white text-danger me-2"  onclick="return confirm('Etes vous sur ?')">
                                                 <i class="far fa-trash-alt me-1" ></i>
                                                 <!-- <i class="far fa-trash-alt me-1" ></i>Supprimer -->
                                             </a>
                                         </abbr>
+                          @endif
                                                 <!-- <button type="button"  class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
                                                 Delete</button> -->
                                     </td>
@@ -130,13 +134,27 @@
     </div>
 </div>
 @if (session('success') )
-                <button type="button" class="btn btn-outline-info mr-1 mb-1 d-none" id="fast-duration">Show .5s</button>
+
+        @if (session('success') == "add")
+             <button type="button" data-content="stagiaire" class="btn btn-outline-info mr-1 mb-1 d-none" id="fast-duration">Stagiaire ajouter</button>
+                {{session('success')}}
+        @elseif (session('success')== "del")
+                <button type="button"  data-content="stagiaire" class="btn btn-outline-info mr-1 mb-1 d-none" id="timeout">Timeout 5s</button>
+        @elseif (session('success') == "edit")
+            <button type="button"   data-content="stagiaire"  class="btn btn-outline-info mr-1 mb-1 d-none" id="sticky">Sticky Toast</button>
+
+        @endif
+               
 @endif
  
  <script>
     window.onload = function() {
-        @if (session('success') )
-        document.getElementById("fast-duration").click();
+        @if (session('success') && session('success') == "add")
+            document.getElementById("fast-duration").click();
+        @elseif (session('success') && session('success') == "del")
+             document.getElementById("timeout").click();
+        @elseif (session('success') && session('success')== "edit" )
+             document.getElementById("sticky").click();
         @endif
     };
 </script>

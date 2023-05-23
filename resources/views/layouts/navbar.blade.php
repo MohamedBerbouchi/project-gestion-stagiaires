@@ -87,13 +87,25 @@
                     <img src="assets/img/coding.png" alt="">
                     <span class="status online"></span>
                 </span>
-                <span>Admin</span>
+                @php
+                use Illuminate\Support\Facades\Session;
+                use App\Models\Utilisateur;
+
+                 $userId = Session::get('userId');
+                $userRole = Utilisateur::select("role")->where("id", $userId)->first()->role;
+                 @endphp
+                @if ($userRole == "Directeur")
+                
+                     <span>Directeur</span>
+                
+                @else
+                     <span>Secretaire</span>
+
+                @endif
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="profile"><i data-feather="user" class="me-1"></i>
                     Profile</a>
-                <a class="dropdown-item" href="settings"><i data-feather="settings" class="me-1"></i>
-                    Settings</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"><i data-feather="log-out" class="me-1"></i>
                     Logout</a>
             </div>

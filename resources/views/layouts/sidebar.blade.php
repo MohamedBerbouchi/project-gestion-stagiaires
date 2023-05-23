@@ -34,12 +34,23 @@
                         <i class='bx bxs-dashboard'></i>
                         <span>les programmes</span></a>
                 </li> 
+
+                @php
+                    use Illuminate\Support\Facades\Session;
+                    use App\Models\Utilisateur;
+
+                     $userId = Session::get('userId');
+                    $userRole = Utilisateur::select("role")->where("id", $userId)->first()->role;
+                @endphp
+                @if ($userRole == "Directeur")
+                    
                 <li class=" @if(request()->is('utilisateurs*')  ) active @endif">
                     <a href="{{  route('utilisateurs.index') }}">
                         <i class='bx bx-group'></i>
                         <!-- <i class="fa fa-users"></i> -->
                         <span>les utilisateurs</span></a>
                 </li>
+                @endif
                 
             </ul>
         </div>

@@ -3,15 +3,7 @@
 
 @section('content')
 <div class="content container-fluid">
-    @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size: 1.5em" >
-        <strong>
-            
-            <i class="fe fe-thumbs-up" data-bs-toggle="tooltip" title="" data-bs-original-title="fe fe-thumbs-up" aria-label="fe fe-thumbs-up"></i>
-        </strong> {{session('success')}}.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-   @endif
+
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
@@ -92,7 +84,9 @@ Left</button>
                                     <th style="font-size:14px">Frais mensuel</th>
                                     <th style="font-size:14px">Frais d'examen</th>
                                     <th style="font-size:14px">Frais de dipôme</th>
+                                    @if ($userRole == "Directeur")
                                     <th style="font-size:14px" >Actions</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -108,6 +102,8 @@ Left</button>
     
                                         <td>{{$item->frais_diplome}}</td>
                                         <td >
+                                            @if ($userRole == "Directeur")
+                                           
                                             <abbr title="Modifier">
                                                 <a href="{{ route('filieres.edit',$item->id )}}"
                                                     class="btn btn-sm btn-white text-success me-2">
@@ -124,8 +120,12 @@ Left</button>
                                             </abbr>
                                                     <!-- <button type="button"  class="btn btn-sm btn-white text-danger me-2" id="confirm-text">
                                                     Delete</button> -->
+                                          
+                                            
                                         </td>
+                                        @endif
                                     </tr>
+
                     @endforeach
                             </tbody>
                         </table>
@@ -153,4 +153,29 @@ Left</button>
        
 //     }
 // </script>
+@if (session('success') )
+
+        @if (session('success') == "add")
+             <button type="button" data-content="filiere" class="btn btn-outline-info mr-1 mb-1 d-none" id="fast-duration">Stagiaire ajouter</button>
+                {{session('success')}}
+        @elseif (session('success')== "del")
+                <button type="button"  data-content="filiere" class="btn btn-outline-info mr-1 mb-1 d-none" id="timeout">Timeout 5s</button>
+        @elseif (session('success') == "edit")
+            <button type="button"   data-content="filiere"  class="btn btn-outline-info mr-1 mb-1 d-none" id="sticky">Sticky Toast</button>
+
+        @endif
+               
+@endif
+ 
+ <script>
+    window.onload = function() {
+        @if (session('success') && session('success') == "add")
+            document.getElementById("fast-duration").click();
+        @elseif (session('success') && session('success') == "del")
+             document.getElementById("timeout").click();
+        @elseif (session('success') && session('success')== "edit" )
+             document.getElementById("sticky").click();
+        @endif
+    };
+</script>
 @endsection

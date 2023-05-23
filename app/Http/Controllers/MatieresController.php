@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Matieres;
 use Illuminate\Http\Request;
-
+use App\Models\Utilisateur;
+use Illuminate\Support\Facades\Session;
  use App\Models\Filiere;
 
 class MatieresController extends Controller
@@ -14,10 +15,16 @@ class MatieresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public  function getRole() {
+        $userId = Session::get('userId');
+        $userRole = Utilisateur::select("role")->where("id",   $userId)->first();
+        return $userRole->role;
+        
+    }
     public function index()
     {
             $matieres = Matieres::all();
-            return view('matiere.index', compact("matieres"));
+            return view('matiere.index', compact("matieres"))->with("userRole",   $this->getRole());;
 
     }
 
@@ -39,7 +46,7 @@ class MatieresController extends Controller
         ]);
         Matieres::create($request->all());
 
-       return redirect()->route("matieres.index")->with("success", "matiere est cree");
+       return redirect()->route("matieres.index")->with("success", "add");
 
 
     }
@@ -66,7 +73,7 @@ class MatieresController extends Controller
         ]);
         $matiere = Matieres::find($id);
         $matiere->update($request->all());
-          return redirect()->back()->with("success", "matiere est modifier");
+          return redirect()->route("matieres.index")->with("success", "edit");
 
     }
 
@@ -76,7 +83,7 @@ class MatieresController extends Controller
         $matiere = Matieres::find($id);
 
         $matiere->delete();
-        return redirect()->back()->with("success", "matiere est supprimer");
+        return redirect()->route("matieres.index")->with("success", "del");
 
     }
 }
