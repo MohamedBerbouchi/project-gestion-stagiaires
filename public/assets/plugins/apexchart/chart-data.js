@@ -55,12 +55,13 @@ $(document).ready(function () {
                 xaxis: {
                     categories: year,
                 },
-                yaxis: { title: { text: "$ (thousands)" } },
+                yaxis: { title: { text: " personne" } },
                 fill: { opacity: 1 },
                 tooltip: {
                     y: {
                         formatter: function (val) {
-                            return "$ " + val + " thousands";
+                            // return "$ " + val + " thousands";
+                            return  val + " personne";
                         },
                     },
                 },
@@ -69,16 +70,19 @@ $(document).ready(function () {
         columnChart.render();
     }
     if ($("#invoice_chart").length > 0) {
+         let anne1 = $("#invoice_chart").data("anne1")
+        let anne2 = $("#invoice_chart").data("anne2")
+        let somme = anne1 + anne2
         var pieCtx = document.getElementById("invoice_chart"),
             pieConfig = {
                 colors: ["#7638ff", "#ff737b", "#fda600", "#1ec1b0"],
-                series: [55, 40, 20, 10],
+                series: [anne1, anne2, somme],
                 chart: {
                     fontFamily: "Poppins, sans-serif",
                     height: 350,
                     type: "donut",
                 },
-                labels: ["Paid", "Unpaid", "Overdue", "Draft"],
+                labels: ["Efectif 1ère Année", "Efectif 2 eme  Année", "Efectif 1ère et 2è Année"],
                 legend: { show: false },
                 responsive: [
                     {

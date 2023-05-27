@@ -117,7 +117,7 @@
                 </div>
                 <div class="card-body">
                        {{-- this is the code fo charts --}}
-                       <div id="invoice_chart"></div> 
+                       <div id="invoice_chart" data-anne1="{{$anne1}}" data-anne2="{{$anne2}}"></div> 
                     <div class="text-center text-muted">
                         <div class="row">
                        
