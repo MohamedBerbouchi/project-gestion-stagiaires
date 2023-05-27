@@ -7,8 +7,12 @@ use App\Http\Controllers\MatieresController;
 use App\Http\Controllers\AttestationController;
 use App\Http\Controllers\ProgrammeController;
 use App\Http\Controllers\UtilisateurController;
+use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Programme;
+use App\Models\Scolarite;
 
 
 /*
@@ -26,6 +30,57 @@ use App\Models\Programme;
 
 
 
+Route::get('/test', function () {
+    $anne_actual = Date("Y");
+    $month_actual = Date("m");
+    $years = [];
+    $homme = [];
+    $femme = [];
+
+    if($month_actual < 7){
+         for ($i=$anne_actual; $i > $anne_actual-5; $i--) { 
+            $anne_scolaire_actual = $i -1 ."-". $i;
+            $years[] = $anne_scolaire_actual;
+            
+        }
+        $years = array_reverse($years);
+        foreach($years as $year){
+                
+            $results = DB::table('stagiaires as st')
+            ->join('scolarites as sc', 'st.id', '=', 'sc.id_stagiaire')
+            ->select('st.civilite', DB::raw('count(*) as count'))
+            ->where('sc.annee_scolaire', '=', $year)
+            ->groupBy('st.civilite')
+            ->pluck('count', 'civilite')
+            ->toArray();
+ 
+            $homme[] = isset($results["H"]) ? $results["H"] : 0;
+            $femme[] = isset($results["F"]) ? $results["F"] : 0;
+        
+        }
+    }else{
+        for ($i=$anne_actual; $i > $anne_actual-5; $i--) { 
+            $anne_scolaire_actual = $i  ."-". $i+1;
+            $years[] = $anne_scolaire_actual;
+        }
+
+    }
+
+    
+    return $femme;
+
+    return $years;
+    // year ["2018","2019","2020","2021","2022"]
+    // homme  [23, 42, 35, 27, 43]
+    // femme  [23, 42, 35, 27, 43]
+
+    // return $anne_scolaire_actual;
+    $stg = Scolarite::selectRaw('classe , count(*) as nb_stg')->where("annee_scolaire", $anne_scolaire_actual)->groupBy("classe")
+    ->get();
+    $anne1 = Scolarite::where('classe' , '1ere Annee')->where("annee_scolaire", $anne_scolaire_actual)->count();
+    $anne2 = Scolarite::where('classe' , '2eme Annee')->where("annee_scolaire", $anne_scolaire_actual)->count();
+    return $stg;
+});
 Route::get('/login', function () {
     return view('login');
 });
@@ -47,9 +102,8 @@ Route::middleware(['IsLoggedIn'])->group(function () {
         return view('layouts.index');
     });
     
-    Route::get('/home', function () {
-        return view('layouts.statistique');
-    })->name('home');
+
+    Route::get('/home', [StatistiqueController::class, "index"])->name('home');
     // Routes for stagiaires
     Route::get('/stagiaires',[StagiaireController::class, "index"])->name('stagiaires.index');
     Route::get('/stagiaires/show/{id}',[StagiaireController::class, "show"])->name('stagiaires.show');

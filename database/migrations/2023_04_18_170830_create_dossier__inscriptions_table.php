@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        
         Schema::create('dossier_inscriptions', function (Blueprint $table) {
             $table->id();
 

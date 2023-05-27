@@ -13,6 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
+
+
         Schema::create('scolarites', function (Blueprint $table) {
             $table->id();
             $table->string("annee_scolaire");
