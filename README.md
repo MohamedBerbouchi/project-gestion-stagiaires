@@ -1,7 +1,7 @@
 ## Introduction
-: une application web conçue pour faciliter la gestion des données et des ressources au sein d'un établissement.
+=> une application web conçue pour faciliter la gestion des données et des ressources au sein d'un établissement.
 
-###Les fonctionnalités principales de l'application sont les suivantes :
+### Les fonctionnalités principales de l'application sont les suivantes :
  - Inscription et connexion : Les utilisateurs peuvent créer un compte et se connecter pour accéder à l'application. Les informations d'inscription sont stockées dans une base de données sécurisée.
  
  - Tableau de bord interactif : Les utilisateurs ont accès à un tableau de bord interactif qui leur permet de voir les informations pertinentes en temps réel, telles que le nombre d'étudiants inscrits, les matières 
