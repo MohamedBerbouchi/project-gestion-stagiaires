@@ -2,12 +2,12 @@
 : une application web conçue pour faciliter la gestion des données et des ressources au sein d'un établissement.
 
 ###Les fonctionnalités principales de l'application sont les suivantes :
- -Inscription et connexion : Les utilisateurs peuvent créer un compte et se connecter pour accéder à l'application. Les informations d'inscription sont stockées dans une base de données sécurisée.
+ - Inscription et connexion : Les utilisateurs peuvent créer un compte et se connecter pour accéder à l'application. Les informations d'inscription sont stockées dans une base de données sécurisée.
  
- -Tableau de bord interactif : Les utilisateurs ont accès à un tableau de bord interactif qui leur permet de voir les informations pertinentes en temps réel, telles que le nombre d'étudiants inscrits, les matières 
+ - Tableau de bord interactif : Les utilisateurs ont accès à un tableau de bord interactif qui leur permet de voir les informations pertinentes en temps réel, telles que le nombre d'étudiants inscrits, les matières 
    enseignées, les horaires des cours, etc.
    
--Recherche et gestion des étudiants : Les fonctionnaires peuvent rechercher des étudiants en fonction de différents critères tels que l'année académique, la filière, le nom ou le prénom. Ils peuvent également 
+- Recherche et gestion des étudiants : Les fonctionnaires peuvent rechercher des étudiants en fonction de différents critères tels que l'année académique, la filière, le nom ou le prénom. Ils peuvent également 
   supprimer des étudiants, modifier leurs données personnelles et télécharger des documents importants tels que des attestations ou des demandes de stage.
 
  
