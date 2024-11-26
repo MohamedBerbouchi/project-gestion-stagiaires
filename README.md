@@ -10,11 +10,7 @@
 - Recherche et gestion des étudiants : Les fonctionnaires peuvent rechercher des étudiants en fonction de différents critères tels que l'année académique, la filière, le nom ou le prénom. Ils peuvent également 
   supprimer des étudiants, modifier leurs données personnelles et télécharger des documents importants tels que des attestations ou des demandes de stage.
 
- 
-![image](https://github.com/MohamedBerbouchi/project-gestion-stagiaires/assets/82718864/0db7661b-cdab-4ffb-9780-49cd7257bc1a)
 
- En conclusion, l'application web que nous avons développée offre une solution complète et pratique pour la gestion des données et des ressources dans un établissement. Les fonctionnalités principales de l'application permettent aux fonctionnaires et aux administrateurs de gérer efficacement les étudiants, les filières, les matières, les programmes et les utilisateurs, tout en offrant une expérience utilisateur agréable et pratique sur tous les types d'appareils.
- 
 ![1](https://github.com/user-attachments/assets/433e8bea-18dc-4734-9811-571398a5c7cb)
 ![2](https://github.com/user-attachments/assets/d20c5bd4-29b6-43a8-ab3e-5bbca754d093)
 ![3](https://github.com/user-attachments/assets/12c34421-121c-4df5-87d0-2df06a5da25b)
